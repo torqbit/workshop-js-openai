@@ -18,6 +18,7 @@ const ChatPage: NextPage = () => {
         { role: "system", content: "loading" },
       ]);
     }
+    setContent("");
 
     const response = await fetch("/api/open-ai", {
       method: "POST",
@@ -28,7 +29,6 @@ const ChatPage: NextPage = () => {
         messages: messages ? [...messages, { role: "user", content: message }] : [{ role: "user", content: message }],
       }),
     });
-    setContent("");
     const result = await response.json();
     if (result.success) {
       setMessages((messages) =>

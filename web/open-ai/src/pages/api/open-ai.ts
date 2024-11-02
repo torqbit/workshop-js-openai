@@ -6,7 +6,6 @@ const openai = new OpenAI({
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { messages } = req.body;
-  console.log(messages, "body");
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
