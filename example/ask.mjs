@@ -1,15 +1,21 @@
 import OpenAI from "openai";
 const openai = new OpenAI();
 
-const completion = await openai.chat.completions.create({
-  model: "gpt-4o-mini",
-  messages: [
-    { role: "system", content: "You are a helpful assistant." },
-    {
-      role: "user",
-      content: "Which is better java or javascript?",
-    },
-  ],
-});
+const args = process.argv;
+console.log(args);
 
-console.log(completion.choices[0].message);
+if (args.length <= 2) {
+  console.error("Missing arguments for application");
+} else {
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      {
+        role: "user",
+        content: args[2],
+      },
+    ],
+  });
+
+  console.log(completion.choices[0].message);
+}
